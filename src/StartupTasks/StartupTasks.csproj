@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>StartupTasks</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Albin Ma</Authors>
+    <Company>Almatek Software Solutions</Company>
+    <Description>Run tasks at startup for .NET 6 applications using hosted services.</Description>
+  </PropertyGroup>
+
+</Project>
