@@ -18,6 +18,7 @@ public static class StartupTaskExtensions
 
         var registry = new StartupTaskRegistry();
         services.AddSingleton<IStartupTaskRegistry>(registry);
+        services.AddSingleton<IStartupTaskEngine, StartupTaskEngine>();
         services.AddHostedService<StartupTaskHostedService>();
 
         return new StartupTaskBuilder(registry, services);

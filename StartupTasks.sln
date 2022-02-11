@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C07CE8B9-4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartupTasks.Tests", "test\StartupTasks.Tests\StartupTasks.Tests.csproj", "{16446C48-7B30-4077-815C-350DB90952B7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example", "example", "{7E6F2886-07EF-4630-8D01-BBA8A0BA04A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartupTasks.Example.Api", "example\StartupTasks.Example.Api\StartupTasks.Example.Api.csproj", "{CC2567B2-449A-4CF2-8E8A-1B0C6D6A8C3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,9 +32,14 @@ Global
 		{16446C48-7B30-4077-815C-350DB90952B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16446C48-7B30-4077-815C-350DB90952B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16446C48-7B30-4077-815C-350DB90952B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC2567B2-449A-4CF2-8E8A-1B0C6D6A8C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2567B2-449A-4CF2-8E8A-1B0C6D6A8C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2567B2-449A-4CF2-8E8A-1B0C6D6A8C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2567B2-449A-4CF2-8E8A-1B0C6D6A8C3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E9181F3A-5FD1-48D8-9E6A-756ECB9F4882} = {C35DB11F-6EC7-4612-B26A-4268ED827F76}
 		{16446C48-7B30-4077-815C-350DB90952B7} = {C07CE8B9-4763-4C52-8FF4-D77835493A59}
+		{CC2567B2-449A-4CF2-8E8A-1B0C6D6A8C3C} = {7E6F2886-07EF-4630-8D01-BBA8A0BA04A4}
 	EndGlobalSection
 EndGlobal
