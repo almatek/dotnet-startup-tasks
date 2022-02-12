@@ -33,40 +33,23 @@ public class StartupTaskEngine : IStartupTaskEngine
     /// </summary>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>Awaitable task.</returns>
-    /// <exception cref="NotSupportedException"></exception>
     public async Task RunAllAsync(CancellationToken cancellationToken)
     {
         using var scope = _provider.CreateScope();
-        var tasksFuncs = new List<(Func<CancellationToken, Task>, bool)>();
 
-        foreach (var registration in _registry.Registrations)
-        {
-            if (registration is StartupTaskTypedRegistration typedReg)
-            {
-                var task = (IStartupTask)scope.ServiceProvider.GetRequiredService(typedReg.Type);
-                tasksFuncs.Add((task.RunAsync, typedReg.IsParallel));
+        var sequentialTasks = _registry.GetAll()
+            .Where(x => !x.RunInParallel)
+            .Select(r => r.CreateTask(_provider))
+            .ToList();
 
-            }
-            else if (registration is StartupTaskActionRegistration actionReg)
-            {
-                tasksFuncs.Add((actionReg.Action, actionReg.IsParallel));
-            }
-            else
-            {
-                throw new NotSupportedException($"Unsupported startup task registration type: {registration.GetType().FullName}");
-            }
-        }
-
-        var parallelTasks = tasksFuncs.Where(x => x.Item2).Select(x => x.Item1);
-        var sequentialTasks = tasksFuncs.Where(x => !x.Item2).Select(x => x.Item1);
-        var runningTasks = new List<Task>();
-
-        foreach (var task in parallelTasks)
-            runningTasks.Add(task(cancellationToken));
+        var parallelTasks = _registry.GetAll()
+            .Where(x => x.RunInParallel)
+            .Select(r => r.CreateTask(_provider)(cancellationToken))
+            .ToList();
 
         foreach (var task in sequentialTasks)
             await task(cancellationToken);
 
-        await Task.WhenAll(runningTasks);
+        await Task.WhenAll(parallelTasks);
     }
 }

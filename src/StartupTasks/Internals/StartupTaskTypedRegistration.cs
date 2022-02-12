@@ -1,3 +1,5 @@
+
+using Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// Used to track a startup task registration using a type.
 /// </summary>
@@ -7,12 +9,12 @@ public class StartupTaskTypedRegistration : IStartupTaskRegistration
     /// Initializes a new instance of the <see cref="StartupTaskTypedRegistration"/> class.
     /// </summary>
     /// <param name="type"></param>
-    /// <param name="isParallel"></param>
+    /// <param name="runInParallel"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public StartupTaskTypedRegistration(Type type, bool isParallel)
+    public StartupTaskTypedRegistration(Type type, bool runInParallel)
     {
         Type = type ?? throw new ArgumentNullException(nameof(type));
-        IsParallel = isParallel;
+        RunInParallel = runInParallel;
     }
 
     /// <summary>
@@ -27,5 +29,24 @@ public class StartupTaskTypedRegistration : IStartupTaskRegistration
     /// If set to <c>true</c>, the startup tasks will be executed in parallel.
     /// If set to <c>false</c>, the startup tasks will be executed in the registered sequence.
     /// </remarks>
-    public bool IsParallel { get; }
+    public bool RunInParallel { get; }
+
+    /// <summary>
+    /// Creates a task out of this registration.
+    /// </summary>
+    /// <param name="provider"></param>
+    /// <returns></returns>
+    /// <exception cref="StartupTaskException"></exception>
+    public Func<CancellationToken, Task> CreateTask(IServiceProvider provider)
+    {
+        try
+        {
+            var task = (IStartupTask)provider.GetRequiredService(Type);
+            return task.RunAsync;
+        }
+        catch (Exception ex)
+        {
+            throw new StartupTaskException($"Unable to create startup task of type '{Type.FullName}'.", ex);
+        }
+    }
 }

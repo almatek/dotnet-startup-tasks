@@ -1,3 +1,4 @@
+
 /// <summary>
 /// Used to track a startup task registration using an action delegate.
 /// </summary>
@@ -7,14 +8,14 @@ public class StartupTaskActionRegistration : IStartupTaskRegistration
     /// Initializes a new instance of the <see cref="StartupTaskActionRegistration"/> class.
     /// </summary>
     /// <param name="action"></param>
-    /// <param name="isParallel"></param>
+    /// <param name="runInParallel"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public StartupTaskActionRegistration(Func<CancellationToken, Task> action, bool isParallel)
+    public StartupTaskActionRegistration(Func<CancellationToken, Task> action, bool runInParallel)
     {
         Action = action ?? throw new ArgumentNullException(nameof(action));
-        IsParallel = isParallel;
+        RunInParallel = runInParallel;
     }
-    
+
     /// <summary>   
     /// Gets or sets the startup task action.
     /// </summary>
@@ -27,5 +28,12 @@ public class StartupTaskActionRegistration : IStartupTaskRegistration
     /// If set to <c>true</c>, the startup tasks will be executed in parallel.
     /// If set to <c>false</c>, the startup tasks will be executed in the registered sequence.
     /// </remarks>
-    public bool IsParallel { get; }
+    public bool RunInParallel { get; }
+
+    /// <summary>
+    /// Creates a task out of this registration.
+    /// </summary>
+    /// <param name="provider"></param>
+    /// <returns></returns>
+    public Func<CancellationToken, Task> CreateTask(IServiceProvider provider) => Action;
 }

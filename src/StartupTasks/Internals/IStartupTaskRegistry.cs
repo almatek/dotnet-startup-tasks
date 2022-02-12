@@ -4,9 +4,9 @@
 public interface IStartupTaskRegistry
 {
     /// <summary>
-    /// Gets the registrations.
+    /// Gets all the registrations.
     /// </summary>
-    IEnumerable<IStartupTaskRegistration> Registrations { get; }
+    IEnumerable<IStartupTaskRegistration> GetAll();
 
     /// <summary>
     /// Adds a startup task registration.

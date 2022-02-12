@@ -6,16 +6,9 @@ public class StartupTaskRegistry : IStartupTaskRegistry
     private readonly List<IStartupTaskRegistration> _registrations = new List<IStartupTaskRegistration>();
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="StartupTaskRegistry"/> class.
+    /// Gets all the registrations.
     /// </summary>
-    public StartupTaskRegistry()
-    {
-    }
-
-    /// <summary>
-    /// Gets the registrations.
-    /// </summary>
-    public IEnumerable<IStartupTaskRegistration> Registrations => _registrations;
+    public IEnumerable<IStartupTaskRegistration> GetAll() => _registrations;
 
     /// <summary>
     /// Adds a startup task registration.
