@@ -36,6 +36,14 @@ try
     startupTasks.Add<ParallelStartupTask>(runInParallel: true);
     startupTasks.Add<ParallelStartupTask>(runInParallel: true);
 
+    startupTasks.AddAction(async (cancellationToken) =>
+        await Console.Out.WriteLineAsync("Let's begin"),
+        runInParallel: true);
+
+    startupTasks.AddAction(cancellationToken => 
+        Console.Out.WriteLineAsync("Let's begin"),
+        runInParallel: true);
+
     var app = builder.Build();
     app.Run();
 
