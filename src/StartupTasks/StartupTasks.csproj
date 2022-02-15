@@ -13,6 +13,9 @@
     <Company>Almatek Software Solutions</Company>
     <Description>Run tasks at startup for .NET 6 applications using hosted services.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RepositoryUrl>https://github.com/almatek/dotnet-startup-tasks</RepositoryUrl>
+    <ProjectUrl>https://github.com/almatek/dotnet-startup-tasks</ProjectUrl>
+    <Tags>startup tasks hosted services utility infrastructure helper</Tags>
   </PropertyGroup>
 
   <ItemGroup>
