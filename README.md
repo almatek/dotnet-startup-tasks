@@ -7,7 +7,7 @@ This is a simple library written in C# .NET 6 for adding startup tasks using hos
 Add the nuget package reference to your project
 
 * Using dotnet-cli `dotnet add package StartupTasks`
-* Using Package Manager `Install-Package StartupTasks -Version`
+* Using Package Manager `Install-Package StartupTasks`
 
 Create as class that implements `IStartupTask`
 ```csharp
