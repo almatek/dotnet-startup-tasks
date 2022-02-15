@@ -8,14 +8,15 @@
 
   <PropertyGroup>
     <PackageId>StartupTasks</PackageId>
+    <PackageTags>startup tasks hosted services utility infrastructure helper</PackageTags>
     <Version>1.0.0</Version>
     <Authors>Albin Ma</Authors>
     <Company>Almatek Software Solutions</Company>
     <Description>Run tasks at startup for .NET 6 applications using hosted services.</Description>
+    <Language>en-US</Language>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/almatek/dotnet-startup-tasks</RepositoryUrl>
-    <ProjectUrl>https://github.com/almatek/dotnet-startup-tasks</ProjectUrl>
-    <Tags>startup tasks hosted services utility infrastructure helper</Tags>
   </PropertyGroup>
 
   <ItemGroup>
