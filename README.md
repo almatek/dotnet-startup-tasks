@@ -58,6 +58,7 @@ app.Run();
 - [x] Add startup tasks executed in hosted services
 - [ ] Add startup task health check report after all have ran
 - [ ] Add option to verification of registered tasks can be resolved at before execution 
+- [ ] Add startup groups so that groups of startup tasks can run sequentially within it's group but in parallel with other groups
 
 See the [open issues](https://github.com/almatek/dotnet-startup-tasks/issues) for a full list of proposed features (and known issues).
 
