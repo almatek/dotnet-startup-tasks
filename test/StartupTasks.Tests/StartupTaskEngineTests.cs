@@ -34,8 +34,8 @@ public sealed class StartupTaskEngineTests
         services.AddSingleton(startupTask2);
 
         var registry = new StartupTaskRegistry();
-        registry.AddRegistration(new StartupTaskTypedRegistration(typeof(EmptyStartupTask), false));
-        registry.AddRegistration(new StartupTaskTypedRegistration(typeof(AnotherEmptyStartupTask), true));
+        registry.AddRegistration(new StartupTaskTypedRegistration<EmptyStartupTask>(false));
+        registry.AddRegistration(new StartupTaskTypedRegistration<AnotherEmptyStartupTask>(true));
 
         var serviceProvider = services.BuildServiceProvider();
 

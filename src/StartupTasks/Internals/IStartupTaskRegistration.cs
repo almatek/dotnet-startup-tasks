@@ -1,8 +1,13 @@
 /// <summary>
 /// Used to track a startup task registration.
 /// </summary>
-public interface IStartupTaskRegistration 
-{ 
+public interface IStartupTaskRegistration : IEquatable<IStartupTaskRegistration>
+{
+    /// <summary>
+    /// Gets a unique value that can be used to identify this registration.
+    /// </summary>
+    string Key { get; }
+
     /// <summary>
     /// Gets whether the startup task should be executed in parallel.
     /// </summary>

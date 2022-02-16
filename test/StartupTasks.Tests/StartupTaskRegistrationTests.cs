@@ -58,7 +58,7 @@ public sealed class StartupTaskRegistrationTests
         var isParallel = true;
 
         // Act
-        var registration = new StartupTaskTypedRegistration(startupTask.GetType(), isParallel);
+        var registration = new StartupTaskTypedRegistration<EmptyStartupTask>(isParallel);
         var task = registration.CreateTask(serviceProvider);
         await task(CancellationToken.None);
 
@@ -70,24 +70,10 @@ public sealed class StartupTaskRegistrationTests
     }
 
     [Fact]
-    public void ShouldThrowIfTypeIsNull()
-    {
-        // Arrange
-        var type = (Type)null;
-        var isParallel = true;
-
-        // Act
-        Action action = () => new StartupTaskTypedRegistration(type, isParallel);
-
-        // Assert
-        action.Should().Throw<ArgumentNullException>("because we expected a null type to throw");
-    }
-
-    [Fact]
     public async Task ShouldThrowIfServiceProviderCannotResolveType()
     {
         // Arrange
-        var registration = new StartupTaskTypedRegistration(typeof(EmptyStartupTask), false);
+        var registration = new StartupTaskTypedRegistration<EmptyStartupTask>(false);
         var services = new ServiceCollection();
         var serviceProvider = services.BuildServiceProvider();
 

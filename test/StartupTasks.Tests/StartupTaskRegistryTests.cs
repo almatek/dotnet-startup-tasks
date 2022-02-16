@@ -11,7 +11,7 @@ public sealed class StartupTaskRegistryTests
         var registry = new StartupTaskRegistry();
         var type = typeof(EmptyStartupTask);
         var isParallel = true;
-        var registration = new StartupTaskTypedRegistration(type, isParallel);
+        var registration = new StartupTaskTypedRegistration<EmptyStartupTask>(isParallel);
 
         // Act
         registry.AddRegistration(registration);
@@ -35,5 +35,19 @@ public sealed class StartupTaskRegistryTests
 
         // Assert
         action.Should().Throw<ArgumentNullException>("because we expected a null registration to throw");
+    }
+
+    [Fact]
+    public void ShouldNotAddDuplicateRegistration()
+    {
+        // Arrange
+        var registry = new StartupTaskRegistry();
+        
+        // Act
+        registry.AddRegistration(new StartupTaskTypedRegistration<EmptyStartupTask>(true));
+        registry.AddRegistration(new StartupTaskTypedRegistration<EmptyStartupTask>(true));
+
+        // Assert
+        registry.GetAll().Should().ContainSingle("because we added a duplicate registration");
     }
 }

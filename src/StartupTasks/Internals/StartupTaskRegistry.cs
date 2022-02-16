@@ -3,7 +3,7 @@
 /// </summary>
 public class StartupTaskRegistry : IStartupTaskRegistry
 {
-    private readonly List<IStartupTaskRegistration> _registrations = new List<IStartupTaskRegistration>();
+    private readonly HashSet<IStartupTaskRegistration> _registrations = new HashSet<IStartupTaskRegistration>();
 
     /// <summary>
     /// Gets all the registrations.

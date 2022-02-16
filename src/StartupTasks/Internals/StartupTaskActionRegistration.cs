@@ -31,9 +31,34 @@ public class StartupTaskActionRegistration : IStartupTaskRegistration
     public bool RunInParallel { get; }
 
     /// <summary>
+    /// They key is unique for every action registered.
+    /// </summary>
+    public string Key => Guid.NewGuid().ToString();
+
+    /// <summary>
     /// Creates a task out of this registration.
     /// </summary>
     /// <param name="provider"></param>
     /// <returns></returns>
     public Func<CancellationToken, Task> CreateTask(IServiceProvider provider) => Action;
+
+    /// <summary>
+    /// Helper method to create a <see cref="StartupTaskActionRegistration"/>.
+    /// </summary>
+    /// <returns></returns>
+    public override int GetHashCode() => Key.GetHashCode();
+
+    /// <summary>
+    /// Equals override.
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public override bool Equals(object? obj) => Equals((IStartupTaskRegistration?)obj);
+
+    /// <summary>
+    /// Equality is based on the key.
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    public bool Equals(IStartupTaskRegistration? other) => other != null && Key == other.Key;
 }

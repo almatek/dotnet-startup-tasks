@@ -46,7 +46,7 @@ public class StartupTaskBuilder : IStartupTaskBuilder
     public IStartupTaskBuilder Add<T>(bool runInParallel = false) where T : class, IStartupTask
     {
         _services.AddScoped<T>();
-        _registry.AddRegistration(new StartupTaskTypedRegistration(typeof(T), runInParallel));
+        _registry.AddRegistration(new StartupTaskTypedRegistration<T>(runInParallel));
 
         return this;
     }
@@ -64,7 +64,7 @@ public class StartupTaskBuilder : IStartupTaskBuilder
             throw new ArgumentNullException(nameof(instance));
 
         _services.AddSingleton(instance);
-        _registry.AddRegistration(new StartupTaskTypedRegistration(typeof(T), runInParallel));
+        _registry.AddRegistration(new StartupTaskTypedRegistration<T>(runInParallel));
 
         return this;
     }
@@ -83,7 +83,7 @@ public class StartupTaskBuilder : IStartupTaskBuilder
             throw new ArgumentNullException(nameof(implementationFactory));
 
         _services.AddScoped<T>(implementationFactory);
-        _registry.AddRegistration(new StartupTaskTypedRegistration(typeof(T), runInParallel));
+        _registry.AddRegistration(new StartupTaskTypedRegistration<T>(runInParallel));
 
         return this;
     }
