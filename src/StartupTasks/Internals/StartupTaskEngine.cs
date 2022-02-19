@@ -39,12 +39,12 @@ public class StartupTaskEngine : IStartupTaskEngine
 
         var sequentialTasks = _registry.GetAll()
             .Where(x => !x.RunInParallel)
-            .Select(r => r.CreateTask(_provider))
+            .Select(r => r.CreateTask(scope.ServiceProvider))
             .ToList();
 
         var parallelTasks = _registry.GetAll()
             .Where(x => x.RunInParallel)
-            .Select(r => r.CreateTask(_provider)(cancellationToken))
+            .Select(r => r.CreateTask(scope.ServiceProvider)(cancellationToken))
             .ToList();
 
         foreach (var task in sequentialTasks)
