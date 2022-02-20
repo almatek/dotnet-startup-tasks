@@ -9,7 +9,7 @@ public class StartupTaskEngine : IStartupTaskEngine
 {
     private readonly IServiceProvider _provider;
     private readonly IStartupTaskRegistry _registry;
-    private readonly ILogger<StartupTaskEngine>? _logger;
+    private readonly ILogger<StartupTaskEngine> _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="StartupTaskEngine"/> class.
@@ -37,19 +37,32 @@ public class StartupTaskEngine : IStartupTaskEngine
     {
         using var scope = _provider.CreateScope();
 
-        var sequentialTasks = _registry.GetAll()
+        var sequentialRegs = _registry.GetAll()
             .Where(x => !x.RunInParallel)
-            .Select(r => r.CreateTask(scope.ServiceProvider))
             .ToList();
 
         var parallelTasks = _registry.GetAll()
             .Where(x => x.RunInParallel)
-            .Select(r => r.CreateTask(scope.ServiceProvider)(cancellationToken))
+            .Select(x => RunTaskAsync(x, scope.ServiceProvider, cancellationToken))
             .ToList();
 
-        foreach (var task in sequentialTasks)
-            await task(cancellationToken);
+        foreach (var task in sequentialRegs)
+            await RunTaskAsync(task, scope.ServiceProvider, cancellationToken).ConfigureAwait(false);
 
-        await Task.WhenAll(parallelTasks);
+        await Task.WhenAll(parallelTasks).ConfigureAwait(false);
+    }
+
+    private Task RunTaskAsync(IStartupTaskRegistration registration, IServiceProvider serviceProvider, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var task = registration.CreateTask(serviceProvider);
+            return task(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while running startup task {StartupTask}.", registration.Key);
+            return Task.CompletedTask;
+        }
     }
 }
