@@ -34,4 +34,4 @@ jobs:
         run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
 
       - name: Push to NuGet.org
-        run: dotnet nuget push **/StartupTasks.${VERSION}.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${{secrets.NUGET_APIKEY}}
+        run: dotnet nuget push **/StartupTasks.${VERSION}.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_APIKEY }}
