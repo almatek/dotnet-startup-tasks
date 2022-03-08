@@ -38,5 +38,5 @@ jobs:
 
       - name: Push to NuGet.org
         env:
-          NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
-        run: dotnet nuget push **/StartupTasks.${VERSION}.nupkg --source "https://api.nuget.org/v3/index.json" --api-key "$NUGET_APIKEY"
+          NUGET_APIKEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push **/StartupTasks.${VERSION}.nupkg --source "https://api.nuget.org/v3/index.json" --api-key $NUGET_APIKEY
