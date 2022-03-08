@@ -9,7 +9,6 @@
   <PropertyGroup>
     <PackageId>StartupTasks</PackageId>
     <PackageTags>startup tasks utility infrastructure helper</PackageTags>
-    <Version>1.0.4</Version>
     <Authors>Albin Ma</Authors>
     <Company>Almatek Software Solutions</Company>
     <Description>Run tasks at startup for .NET 6 applications using hosted services.</Description>
