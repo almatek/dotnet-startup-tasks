@@ -1,5 +1,5 @@
 # StartupTasks
-[![Build and test](https://github.com/almatek/dotnet-startup-tasks/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/almatek/dotnet-startup-tasks/actions/workflows/build-and-test.yml)
+[![build and test](https://github.com/almatek/dotnet-startup-tasks/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/almatek/dotnet-startup-tasks/actions/workflows/build-and-test.yml) [![publish to nuget](https://github.com/almatek/dotnet-startup-tasks/actions/workflows/release.yml/badge.svg)](https://github.com/almatek/dotnet-startup-tasks/actions/workflows/release.yml)
 ## About The Project
 This is a simple library written in C# .NET 6 for adding startup tasks using hosted services.
 
